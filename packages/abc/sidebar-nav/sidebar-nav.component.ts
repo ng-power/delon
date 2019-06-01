@@ -40,6 +40,7 @@ export class SidebarNavComponent implements OnInit, OnDestroy {
   private bodyEl: HTMLBodyElement;
   private unsubscribe$ = new Subject<void>();
   private floatingEl: HTMLDivElement;
+  //菜单项
   list: Nav[] = [];
 
   @Input() @InputBoolean() disabledAcl = false;
@@ -65,7 +66,8 @@ export class SidebarNavComponent implements OnInit, OnDestroy {
     private ngZone: NgZone,
     @Inject(DOCUMENT) private doc: any,
     @Inject(WINDOW) private win: Window,
-  ) {}
+  ) {
+  }
 
   private floatingAreaClickHandle(e: MouseEvent) {
     e.stopPropagation();
@@ -87,7 +89,8 @@ export class SidebarNavComponent implements OnInit, OnDestroy {
   }
 
   private clearFloatingContainer() {
-    if (!this.floatingEl) return;
+    if (!this.floatingEl)
+      return;
     this.floatingEl.removeEventListener('click', this.floatingAreaClickHandle.bind(this));
     // fix ie: https://github.com/ng-alain/delon/issues/52
     if (this.floatingEl.hasOwnProperty('remove')) {
@@ -160,7 +163,8 @@ export class SidebarNavComponent implements OnInit, OnDestroy {
 
   to(item: Menu) {
     this.select.emit(item);
-    if (item.disabled) return;
+    if (item.disabled)
+      return;
 
     if (item.externalLink) {
       if (item.target === '_blank') {
@@ -176,7 +180,8 @@ export class SidebarNavComponent implements OnInit, OnDestroy {
   toggleOpen(item: Nav) {
     if (!this.openStrictly) {
       this.menuSrv.visit(this._d, i => {
-        if (i !== item) i._open = false;
+        if (i !== item)
+          i._open = false;
       });
       let pItem = item.__parent;
       while (pItem) {

@@ -23,6 +23,7 @@ import {
 @BaseUrl('/user')
 @BaseHeaders({ bh: 'a' })
 class MockService extends BaseApi {
+
   @GET()
   query(@Query('pi') _pi: number, @Query('ps') _ps: number, @Headers('mh') _mh: string): Observable<any> {
     return null as any;
@@ -94,6 +95,7 @@ class MockEmptyService extends BaseApi {
   GET(): Observable<any> {
     return null as any;
   }
+
   @GET('/a')
   A(): Observable<any> {
     return null as any;

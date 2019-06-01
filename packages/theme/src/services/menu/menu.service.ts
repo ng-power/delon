@@ -58,8 +58,10 @@ export class MenuService implements OnDestroy {
       item.__parent = parent;
       item._depth = depth;
 
-      if (!item.link) item.link = '';
-      if (!item.externalLink) item.externalLink = '';
+      if (!item.link)
+        item.link = '';
+      if (!item.externalLink)
+        item.externalLink = '';
 
       // badge
       if (item.badge) {
@@ -189,7 +191,8 @@ export class MenuService implements OnDestroy {
         }
       });
 
-      if (!recursive) break;
+      if (!recursive)
+        break;
 
       url = url
         .split('/')
@@ -206,7 +209,8 @@ export class MenuService implements OnDestroy {
    *  - 菜单数据源包含 `/ware`，则 `/ware/1` 也视为 `/ware` 项
    */
   openedByUrl(url: string | null, recursive = false) {
-    if (!url) return;
+    if (!url)
+      return;
 
     let findItem = this.getHit(this.data, url, recursive, i => {
       i._selected = false;
@@ -230,7 +234,8 @@ export class MenuService implements OnDestroy {
     const ret: Menu[] = [];
     let item = this.getHit(this.data, url, recursive);
 
-    if (!item) return ret;
+    if (!item)
+      return ret;
 
     do {
       ret.splice(0, 0, item);

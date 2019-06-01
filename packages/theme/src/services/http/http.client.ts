@@ -18,6 +18,7 @@ export type _HttpHeaders = HttpHeaders | { [header: string]: string | string[] }
 // tslint:disable-next-line:class-name
 export class _HttpClient {
   private cog: HttpClientConfig;
+
   constructor(private http: HttpClient, cog: AlainThemeConfig) {
     this.cog = {
       nullValueHandling: 'include',
@@ -38,7 +39,8 @@ export class _HttpClient {
     Object.keys(params).forEach(key => {
       let _data = params[key];
       // 忽略空值
-      if (this.cog.nullValueHandling === 'ignore' && _data == null) return;
+      if (this.cog.nullValueHandling === 'ignore' && _data == null)
+        return;
       // 将时间转化为：时间戳 (秒)
       if (this.cog.dateValueHandling === 'timestamp' && _data instanceof Date) {
         _data = _data.valueOf();
@@ -49,7 +51,8 @@ export class _HttpClient {
   }
 
   appliedUrl(url: string, params?: {}) {
-    if (!params) return url;
+    if (!params)
+      return url;
     url += ~url.indexOf('?') ? '' : '?';
     const arr: string[] = [];
     for (const key in params) {
@@ -815,7 +818,8 @@ export class _HttpClient {
     } = {},
   ): Observable<any> {
     this.begin();
-    if (options.params) options.params = this.parseParams(options.params);
+    if (options.params)
+      options.params = this.parseParams(options.params);
     return this.http.request(method, url, options).pipe(
       tap(() => this.end()),
       catchError(res => {

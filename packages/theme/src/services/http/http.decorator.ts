@@ -7,7 +7,8 @@ import { throwError, Observable } from 'rxjs';
 import { _HttpClient } from './http.client';
 
 export abstract class BaseApi {
-  constructor(@Inject(Injector) protected injector: Injector) {}
+  constructor(@Inject(Injector) protected injector: Injector) {
+  }
 }
 
 export interface HttpOptions {
@@ -22,26 +23,20 @@ export interface HttpOptions {
 interface ParamType {
   key: string;
   index: number;
+
   [key: string]: any;
+
   [key: number]: any;
 }
 
 const paramKey = `__api_params`;
-
-function setParam(target: any, key = paramKey) {
-  let params = target[key];
-  if (typeof params === 'undefined') {
-    params = target[key] = {};
-  }
-  return params;
-}
 
 /**
  * 默认基准URL
  * - 有效范围：类
  */
 export function BaseUrl(url: string) {
-  return function<TClass extends new (...args: any[]) => BaseApi>(target: TClass): TClass {
+  return function <TClass extends new (...args: any[]) => BaseApi>(target: TClass): TClass {
     const params = setParam(target.prototype);
     params.baseUrl = url;
     return target;
@@ -56,14 +51,22 @@ export function BaseHeaders(
   headers:
     | HttpHeaders
     | {
-        [header: string]: string | string[];
-      },
+    [header: string]: string | string[];
+  },
 ) {
-  return function<TClass extends new (...args: any[]) => BaseApi>(target: TClass): TClass {
+  return function <TClass extends new (...args: any[]) => BaseApi>(target: TClass): TClass {
     const params = setParam(target.prototype);
     params.baseHeaders = headers;
     return target;
   };
+}
+
+function setParam(target: any, key = paramKey) {
+  let params = target[key];
+  if (typeof params === 'undefined') {
+    params = target[key] = {};
+  }
+  return params;
 }
 
 function makeParam(paramName: string) {
@@ -110,6 +113,7 @@ export const Headers = makeParam('headers');
 
 function makeMethod(method: string) {
   return function(url: string = '', options?: HttpOptions) {
+
     return (_target: BaseApi, targetKey?: string, descriptor?: PropertyDescriptor) => {
       descriptor!.value = function(...args: any[]): Observable<any> {
         options = options || {};

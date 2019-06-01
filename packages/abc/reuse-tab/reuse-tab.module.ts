@@ -21,4 +21,5 @@ const NOEXPORTS = [ReuseTabContextMenuComponent, ReuseTabContextComponent, Reuse
   entryComponents: [ReuseTabContextMenuComponent],
   exports: [...COMPONENTS],
 })
-export class ReuseTabModule {}
+export class ReuseTabModule {
+}

@@ -11,9 +11,9 @@
        [nzTwotoneColor]="i.twoToneColor"
        [nzIconfont]="i.iconfont"></i>
     <i *ngSwitchCase="'iconfont'"
-      class="sidebar-nav__item-icon"
-      nz-icon
-      [nzIconfont]="i.iconfont"></i>
+       class="sidebar-nav__item-icon"
+       nz-icon
+       [nzIconfont]="i.iconfont"></i>
     <img *ngSwitchCase="'img'"
          src="{{ i.value }}"
          class="sidebar-nav__item-icon sidebar-nav__item-img">
@@ -41,14 +41,17 @@
              [ngClass]="{'sidebar-nav__item-disabled': child1.disabled}">
             <ng-container *ngIf="!collapsed">
               <ng-template [ngTemplateOutlet]="icon"
-                           [ngTemplateOutletContext]="{$implicit: child1.icon}"></ng-template>
+                           [ngTemplateOutletContext]="{$implicit: child1.icon}">
+              </ng-template>
             </ng-container>
             <nz-tooltip *ngIf="collapsed"
                         nzPlacement="right"
                         [nzTitle]="child1.text">
               <span nz-tooltip>
                 <ng-template [ngTemplateOutlet]="icon"
-                             [ngTemplateOutletContext]="{$implicit: child1.icon}"></ng-template>
+                             [ngTemplateOutletContext]="{$implicit: child1.icon}">
+
+                </ng-template>
               </span>
             </nz-tooltip>
             <span class="sidebar-nav__item-text">{{ child1.text }}</span>
@@ -83,8 +86,7 @@
                    (click)="to(child2)"
                    [attr.data-id]="child2.__id"
                    class="sidebar-nav__item-link"
-                   [ngClass]="{'sidebar-nav__item-disabled': child2.disabled}">{{
-                  child2.text }}</a>
+                   [ngClass]="{'sidebar-nav__item-disabled': child2.disabled}">{{ child2.text }}</a>
                 <!-- has children link -->
                 <a *ngIf="child2._type === 3"
                    (click)="toggleOpen(child2)"

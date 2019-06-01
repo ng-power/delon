@@ -40,7 +40,8 @@ describe('theme: http.client', () => {
     beforeEach(() => createModule());
 
     it('#loading', fakeAsync(() => {
-      http.get(URL).subscribe(() => {});
+      http.get(URL).subscribe(() => {
+      });
       tick(11);
       expect(http.loading).toBeTruthy();
       backend.expectOne(() => true).flush(OK);
